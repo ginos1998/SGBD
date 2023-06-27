@@ -63,10 +63,10 @@ El listado tendrá las siguientes columnas:
 - Cantidad de clientes que residen en la ciudad
 - Monto total recaudado en esa ciudad */
 
-SELECT cty.city              AS ciudad,
-       ctry.country          AS pais,
-       COUNT(cm.customer_id) AS ctd_clientes,
-       SUM(p.amount)         AS recaudado
+SELECT cty.city                       AS ciudad,
+       ctry.country                   AS pais,
+       COUNT(DISTINCT cm.customer_id) AS ctd_clientes,
+       SUM(p.amount)                  AS recaudado
 FROM city cty
          LEFT JOIN country ctry on ctry.country_id = cty.country_id
          LEFT JOIN address a on cty.city_id = a.city_id

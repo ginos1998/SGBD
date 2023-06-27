@@ -1,0 +1,229 @@
+1. Un índice hash bitmap la pseudoclave es un número binario. V
+2. Los predicados de junta pueden tener un operador que no sea de igualdad. V
+3. En una ejecución optimizada los predicados locales se ejecutan primero. V
+4. El uso del Left Join siempre produce filas con campos con valor null. F5. Las transacciones sólo pueden actuar sobre una tabla.F
+6. Los predicados locales solo pueden ser comparaciones de igualdad.F
+7. No hay conflicto cuando sobre un item una transacción quiere tomar un cierre de escritura
+y ya otra transacción tiene un cierre de lectura sobre el mismo ítem.F8. En una base de datos a los usuarios se les debe otorgar los mínimos privilegios
+necesarios para realizar las tareas que tienen autorizadas.V
+9. En la definición del criterio de agrupamiento de la cláusula Group By de un select no se
+pueden poner llamadas a funciones, solo una lista de atributos.F
+10. Los índices tipo HASH son óptimos en consultas del tipo “...WHERE atributo =... . V
+11. Cuando en un Select agrupo por Group By debo utilizar la lista de columnas que
+recupera solo definiciones de columnas que estén en la lista de agrupamiento, que sean
+dependientes funcionalmente de estas o sean funciones de agregación. V12. Un predicado local es una expresión lógica que permite filtrar las tuplas de solo una
+tabla de las que participan de una consulta.V
+13. El operador de un JOIN siempre debe vincular tablas por una FK. F
+14. Un índice hash bitmap aumenta la profundidad del directorio cuando se completa
+cualquier frame.F
+15. Los predicados de junta solo pueden tener un operador de igualdad.F16. Los BTree son óptimos en consultas del tipo “ … WHERE monto > … . V
+17. El SQL injection se mitiga usando consultas parametrizadas desde las aplicaciones
+cliente. V18. Un predicado local es una expresión lógica que permite filtrar las tuplas que resultan en
+un join. F
+19. Los predicados de junta en una consulta optimizada se ejecutan antes que los
+predicados locales.F
+20. En un índice hash bitmap la función hash genera un número binario a partir de la clave. (F segun chat gpt)
+21. Un índice hash bitmap utiliza buckets cuando se completa cualquier frame. F
+22. Los predicados de junta son expresiones lógicas que filtran las tuplas que resultan del
+producto cartesiano de dos tablas. V
+23. El operador de un join puede ser cualquier expresión lógica válida. V
+24. Las transacciones son lógicamente atómicas. V1. Una ejecución de dos o más transacciones concurrentes se denomina
+"serializable" si la misma ejecuta las transacciones una después de la otra y
+no en forma entrelazada.
+F – Idealmente, las transacciones deben ser serializables. Se dice que las
+transacciones son serializables si los resultados de ejecutar transacciones
+simultáneamente son los mismos que los resultados de ejecutarlas en serie, es
+decir, una tras otra. No es importante que la transacción se ejecute en primer lugar,
+solo que el resultado no refleja ninguna combinación de las transacciones.
+2. Se dice que hay conflicto en la ejecución de dos transacciones
+concurrentes sobre un mismo ítem cuando una pide un bloqueo que la otra ya
+lo tiene y uno de los dos es un bloqueo de escritura.
+V – Se dice que dos operaciones Ii e Ij de un plan S están en conflicto si operan
+sobre el mismo dato, pertenecen a transacciones distintas y al menos una de ellas
+es escritura.
+3. En seguridad se deben dar a los usuarios los mínimos atributos necesarios
+para realizar sus tareas. V -
+4. En una consulta SQL Select con cláusula Group By no se deben poner en la
+selección atributos que no estén en el Group By o que no sean
+funcionalmente dependiente de estos. V.-
+5. La optimización de una consulta intenta ejecutar en primera instancia los
+predicados de junta y luego los predicados locales.
+F - Primero deben tenerse en cuenta los predicados locales y al último los de junta.
+Hacer juntas con tablas grandes es muy costoso.
+6. Un índice denso exige que los registros de la tabla apuntada estén
+ordenados.
+F - En el índice denso, hay un registro de índice para cada valor clave de búsqueda
+en la base de datos. Por esto no es necesario el orden.
+7. Un índice árbol B+ siempre está equilibrado. V- Si
+8. La elección o no de usar o no un índice es independiente del estado de los
+datos y dependiente de las claves de ese índice.
+F.- La eleccion del índice depende del orden de los datos. en datos desordenados,
+no se puede usar un índice no denso, x ej.
+9. La concurrencia se produce cada vez que dos usuarios acceden
+simultáneamente a la base de datos. F – Simultáneamente a un dato10. Los locks se utilizan para lograr la serialización de la ejecución de dos
+transacciones concurrentes. V-
+11. Una transacción puede quedar grabada a medias siempre y cuando las
+claves foráneas sean respetadas.
+F - Grabar implica que se hizo un commit, es decir que queda grabada
+definitivamente en la base de datos.
+12. Toda transacción puede ser serializada.
+F - Existen no serializables. Cuando una depende del resultado de otra.
+13. El recovery manager sirve para asegurar que todas las transacciones
+quedan correctamente grabadas y que son completamente ejecutadas.
+F.- Asegura el grabado en disco de aquellas que hayan finalizado (commiteado). Lo
+restante a grabar, es sacado de la lista Redo.
+14. Una transacción puede encapsular una sola operación. V.-
+15. Toda operación sobre la DB es parte de una transacción. V--
+16. El recovery manager vuelve la base al estado del último check point.
+F - Usando el algoritmo undo-redo si una transacción no finalizó, se vuelve al
+comienzo de la misma, no al check point.
+17. La cláusula Having del Select es un filtro que se aplica sobre el resultado
+de procesar la consulta definida en el From, en el Where y en el Group By si
+los hubiera. V.-
+18. Para poner una cláusula Having se requiere que haya un Group By. F.-
+19. El uso del Left Outer Join siempre produce filas con campos con valor null.
+F.-
+20. Un Select no siempre devuelve una tabla, puede devolver un escalar.
+F - Por más que sea un solo valor es una tabla también.
+21. Una Subconsulta interna puede hacer referencia a tablas de la consulta
+externa.
+V-
+22. Hay tipos de índices que funcionan mejor que otros según el estado de los
+datos.
+F.- La elección del índice depende del orden de los datos. en datos desordenados,
+no se puede usar un índice no denso, x ej.23. El manejo de la concurrencia no debe permitir que una transacción acceda
+a los datos que necesite hasta que todas las otras transacciones que usan
+esos datos hayan finalizado.
+V - Una transacción no puede leer ni escribir un ítem hasta tanto no ha obtenido un
+cierre sobre ese ítem. Una transacción que pide un cierre sobre un ítem que está
+tomado por otro cierre que está en conflicto con el existente debe esperar hasta que
+la primera transacción lo libere para poder tomarlo.
+24. Un conflicto se produce siempre que una transacción quiere acceder a un
+dato y otra ya tiene un lock tomado sobre ese dato.
+F - Si ambas transacciones solo quieren realizar lectura no hay conflicto
+25. La recuperación necesita sólo de los datos del log de transacciones para
+reconstruir un estado consistente de la base de datos.
+V - Después del crash recupera todo desde el último check point.
+26. El optimizador de consultas se basa en una estimación de los costos de
+los diferentes planes de ejecución y utiliza el de mínimo costo. V -
+27. Sólo se pueden usar Subconsultas en la cláusula Where cuando no están
+afectadas por un tipo de join.
+F - La Subconsulta devuelve una tabla, así que es lo mismo.
+28. Las restricciones de fk son parte de la definición de la estructura de la
+base de datos.
+V –las restricciones de fk y otros campos, suelen venir dadas por las reglas de negocio
+29. Una SGBD debe garantizar la calidad de los datos. F.-
+30. Las reglas de negocio no se pueden modelar usando Store Procedures. F.-
+31. Usar Store Procedure ayuda a mejorar la seguridad de la Base de Datos.
+V - Evita errores de ingreso por usuario e inyección de código SQL.
+32. Para poder definir una transacción todas las operaciones que la componen
+deben actuar sobre una la misma tabla. F.-
+33. El supuesto de correctitud de la ejecución de una o más transacciones
+concurrentes establece que solo se pueden ejecutar las operaciones de modo
+serial o sea las transacciones una después de la otra y nunca de manera
+entrelazada. F.-34. Un índice B+ se caracteriza porque la cantidad de accesos que debo
+realizar para encontrar una clave es siempre la misma. V.-
+35. Un índice no denso exige que las claves en el archivo destino estén
+ordenadas.
+V - El no denso siempre ordenada en la tabla de destino.
+36. costo (A |X| B) = costo (B |X| A). F.- No siempre es igual.
+37. Una ejecución de dos o más transacciones concurrentes es serializable si
+produce el mismo resultado, estado de los datos, que una ejecución serial de
+esas mismas transacciones. V.-
+38. Un índice de tipo hash-bitmap cuando completa una página debe usar
+buckets como listas enlazadas. V.-
+39. El uso de índices no genera ningún costo adicional en la performance
+general de la BD, solo mejora el tiempo de respuesta de las consultas.
+F - Costo: costo de acceso al índice + costo de acceso a la relación
+40. Un DDL (Data Definition Language) provee un lenguaje para la formulación
+de consultas entre otras cosas.
+F - Quien provee un lenguaje para formulación de consultas en el DML.
+41. Una transacción es un conjunto de operaciones donde obligatoriamente
+todas actúan sobre un mismo ítem. F.-
+42. Las claves candidatas de una relación cumplen con las mismas
+condiciones que la clave principal.
+V - Sea Cc = {CC1, CC2,...,CCn} conjunto de claves candidatas. Se define a la clave
+principal PK = CCn pertenece a Cc.
+43. En un diagrama DER una interrelación muchos a muchos, al momento de
+transformarse a un diseño de esquemas de la relación, genera un tercer
+esquema de relación con claves foráneas apuntando a ambas de las dos
+entidades vinculadas.
+V - El nuevo esquema de relación puede o no contener una PK propia. No obstante
+debe de contener un vínculo con las tablas que relaciona, siendo este las FKs que
+apuntan a las PKs de las tablas que relaciona.
+44. Un DML (Data Management Language) provee un lenguaje para la
+formulación de consultas entre otras cosas.
+V - Lenguaje de Manipulación de Datos (Data Manipulation Language, DML) es un
+lenguaje proporcionado por los sistemas gestores de bases de datos que permite alos usuarios de la misma llevar a cabo las tareas de consulta o modificación de los
+datos contenidos en las Bases de Datos del SGBD.
+45. Para que un conjunto de atributos sea una clave candidata no debe
+cumplir con la condición de minimalidad como la clave principal.
+F - Las claves candidatas son un conjunto de claves que en potencia pueden ser
+seleccionadas como clave principal. Por tanto deben de cumplir con el criterio de
+minimalidad.
+46. En un diagrama DER una interrelación uno a muchos al momento de
+transformarse a un diseño de esquemas de relación genera un tercer esquema
+de relación con claves foráneas apuntando a ambas de las dos entidades
+vinculadas.
+F - La relación que genera un tercer esquema de relación es una interrelación
+muchos a muchos. En un esquema uno a muchos, la clave foránea se encuentra en
+la tabla de muchos, apuntando a la clave principal de la otra tabla.
+47. Explique (con sus palabras) cómo funciona el mecanismo de cierre de dos
+fases y porque.
+Se utiliza el mecanismo de cierre de dos fases para evitar el interbloqueo, para esto,
+una transacción debe pedir los locks sobre los recursos y una vez que devuelve uno
+debe devolver todos, no puede devolver uno y pedir otro, pide todos seguidos y
+después devuelve todos seguidos.
+48. Resolver la concurrencia de transacciones por el método de dos fases
+puede derivar en un dead_lock. V.-
+49. El dominio de un atributo de una relación puede ser un conjunto finito. V –
+50. El análisis del cumplimiento de las formas normales se realiza por cada
+esquina de relación independiente de los otros. V.-
+51. La forma normal de Boyce Codd es lo suficientemente genérica para
+detectar todas las anomalías de actualización que pueden producirse. V -
+52. Las formas normales son de cumplimiento obligatorio para un diseño
+correcto de una Base de Datos.
+F - La única forma normal obligatoria es la 1FN que determina la no existencia de
+atributos no atómicos y multivaluados. Las restantes formas normales permiten ir
+reduciendo la redundancia de los datos. El aumento en la normalización debe
+garantizar siempre la no pérdida de la información y de las dependencias
+funcionales.53. Para que un esquema de relación se encuentre en 3ra forma Normal no
+debe existir una dependencia funcional no trivial que no tenga como lado
+izquierdo una clave candidata.
+F- porque esa es la definición de la Forma Normal de Boyce Code que abarca
+mayor cantidad de casos.
+54. Es posible utilizar una configuración donde un índice no denso indexe a un
+índice denso que a su vez indexe a un archivo tipo montículo
+V.- Porque los índices no densos se utilizan para indexar archivos ordenados como
+un índice denso, y los índices densos se utilizan para indexar archivos no ordenados
+como un tipo montículo.
+55. El dominio de un atributo siempre es un conjunto finito.
+F.- Porque Un dominio puede ser un conjunto infinito por ejemplo el dominio de los
+números reales.
+56. Una dependencia funcional no trivial es aquella que tiene del lado
+izquierdo una clave candidata
+57. Un esquema de relación es el conjuntos de los atributo de la relación. V.-
+58. Es condición necesaria para que un esquema de relación esté en FNBC
+que todas las DFs no tengan atributos no clave que dependan de parte de la
+clave. V.-
+59. Una interrelación uno a muchos genera un atributo clave foránea en la
+relación del lado del uno que apunta al lado de muchos.
+F.- es al revés.
+60. El SQL-Injection es una falla de seguridad que afecta a las consultas
+construidas dinámicamente que incluyen datos ingresados por el usuario. V.-
+61. Las transacciones se pueden utilizar para mantener la integridad de los
+datos según el dominio del problema. V.-
+62. Cualquier predicado válido en la cláusula HAVING también es válido en la
+cláusula WHERE.
+F – En having se pueden usar funciones de agregación. Where es un filtro y having
+un post filtro.
+63. El comando ROLLBACK se ejecuta cuando deseo deshacer una
+transacción que aún no recibió un COMMIT. V.-64. La profundidad de un índice Bitmap establece la cantidad máxima de
+claves que puede tener la tabla sin tener que regenerarse. V
+65. La cláusula GROUP BY es obligatoria para toda consulta que utilice
+funciones de agregación como MAX, MIN, AVG, etc, en el SELECT. F.-
+66. No se puede crear un índice por más de un atributo. F.-
+67. En un índice HASH se debe garantizar que las claves generadas por la
+función de hashing no se repitan. V.-
+68. La optimización de Consultas busca identificar los planes menos
+costosos. V.-
